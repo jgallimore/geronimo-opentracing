@@ -25,7 +25,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import zipkin2.Span;
@@ -52,12 +51,6 @@ public class BasicZipkinTest extends Arquillian {
     @ArquillianResource
     private URL serviceUrl;
 
-    @BeforeMethod
-    public void configure() {
-
-
-    }
-
     @BeforeSuite
     public void setup() {
         zipkin = new ZipkinRule();
@@ -68,7 +61,6 @@ public class BasicZipkinTest extends Arquillian {
         System.setProperty("geronimo.opentracing.span.converter.zipkin.http.maxSpansIteration","1");
         System.setProperty("geronimo.opentracing.span.converter.zipkin.http.bufferSize","1");
         System.setProperty("geronimo.opentracing.span.converter.zipkin.http.useV2","true");
-
     }
 
 
