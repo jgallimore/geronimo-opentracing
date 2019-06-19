@@ -25,6 +25,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import zipkin2.Span;
@@ -63,6 +64,16 @@ public class BasicZipkinTest extends Arquillian {
         System.setProperty("geronimo.opentracing.span.converter.zipkin.http.useV2","true");
     }
 
+    @AfterSuite
+    public void teardown() {
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.sender");
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.http.collector");
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.http.bulkSendInterval");
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.http.maxSpansPerBulk");
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.http.maxSpansIteration");
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.http.bufferSize");
+        System.clearProperty("geronimo.opentracing.span.converter.zipkin.http.useV2");
+    }
 
     /**
      * Test that server endpoint is adding standard tags
